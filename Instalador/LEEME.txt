@@ -1,0 +1,95 @@
+TRADUCTOR GAMER
+Traduce el chat de World of Warcraft al español, con una IA que corre en tu
+propio computador. No envía nada a internet y no toca el juego: solo lee lo
+que tú copias.
+
+
+QUÉ NECESITAS
+- Windows 10 u 11.
+- World of Warcraft instalado (cualquier versión: Retail, Classic, etc.).
+- Unos 6 GB libres en disco e internet para la instalación.
+- Recomendado: tarjeta de video con 6 GB o más. Sin ella funciona, pero cada
+  traducción tarda bastante más.
+
+
+CÓMO INSTALAR
+1. Cierra World of Warcraft.
+2. Haz doble clic en InstalarTraductorWoW.exe.
+   Si Windows muestra "Windows protegió su PC", haz clic en "Más información"
+   y luego en "Ejecutar de todas formas". Aparece porque el programa no está
+   firmado, no porque tenga un problema.
+3. Indica la carpeta de tu versión de WoW. El instalador intenta encontrarla
+   solo; si no, búscala con "Examinar". Ejemplo:
+      C:\Program Files (x86)\World of Warcraft\_classic_era_
+   Es la carpeta que tiene dentro "Interface" y "WTF".
+4. Haz clic en "Instalar" y espera. Descarga unos 4 GB en total, así que puede
+   tardar varios minutos.
+5. Al terminar aparece la pantalla de verificación. Cuando las cinco líneas
+   estén en verde y la última quede girando, está todo listo.
+
+
+CÓMO USARLO
+1. Abre "Traductor WoW" desde el acceso directo del Escritorio. Se abre su
+   ventana y queda en la barra de tareas. Cuando el punto se pone verde y dice
+   "Funcionando", está listo. Puedes minimizarla, pero no la cierres: mientras
+   esté abierta todo funciona, y al cerrarla se apagan el traductor y la IA
+   (se libera la memoria de la tarjeta de video).
+2. Abre WoW. En la pantalla de personajes entra a "AddOns" y revisa que
+   "Traductor WoW" esté marcado.
+3. Pon el juego en "Pantalla completa (en ventana)" en Opciones > Gráficos,
+   para que la traducción se vea encima.
+4. Haz clic sobre un mensaje del chat. Se abre una cajita con el texto.
+5. Presiona Ctrl+C. Aparece la traducción en una ventana flotante.
+
+Otras formas: clic derecho sobre el nombre de un jugador > "Traducir mensaje",
+o escribe /tr para traducir el último mensaje recibido.
+
+PARA ESCRIBIR EN INGLÉS
+1. Haz clic en el botón de Traductor WoW en el minimapa (icono de una nota),
+   escribe tu mensaje en español y presiona Enter.
+   También puedes escribirlo directo en el chat con /twow. Ejemplo:
+      /twow hola, busco grupo para Deadmines
+2. Se abre la cajita con tu mensaje. Presiona Ctrl+C.
+3. Aparece la traducción al inglés y el aviso "Copiado".
+4. El chat queda abierto: pega con Ctrl+V y presiona Enter.
+
+La ventana de la traducción se arrastra con el mouse (recuerda la posición) y
+se oculta con su X o sola a los 30 segundos. Para salir del programa, cierra
+la ventana "Traductor WoW" de la barra de tareas.
+
+
+SI ALGO NO FUNCIONA
+- No aparece la traducción: revisa que Traductor WoW esté abierto (su
+  ventana en la barra de tareas, con el punto verde).
+- "No se pudo conectar con Ollama": cierra la ventana de Traductor WoW y
+  vuelve a abrirlo.
+- La primera traducción tarda unos segundos: es normal, está cargando la IA.
+  Las siguientes son casi instantáneas.
+- Si ya usabas Ollama para otras cosas: el instalador no cambia nada de tu
+  Ollama, y el traductor no lo apaga si ya estaba abierto.
+- No aparece el addon en el juego: instalaste en la carpeta de otra versión de
+  WoW. Vuelve a abrir el instalador y elige la correcta.
+- "Windows no dejó copiar el addon": clic derecho sobre el instalador >
+  "Ejecutar como administrador".
+- El antivirus lo bloquea: es un falso positivo frecuente en programas hechos
+  con Python. Agrega una excepción.
+- Para revisar el estado en cualquier momento, vuelve a abrir el instalador:
+  no descarga nada de nuevo y muestra la verificación.
+
+
+PARA AJUSTAR LAS TRADUCCIONES
+Los archivos están en la carpeta del programa. Para abrirla, pega esto en la
+barra de direcciones del Explorador:   %LOCALAPPDATA%\TraductorWoW
+- prompt.txt: reglas y glosario de siglas. Si una sigla sale mal traducida,
+  agrégala ahí. Los cambios se aplican en la siguiente traducción.
+- prompt_en.txt: lo mismo, para lo que escribes con /twow.
+- .env: configuración (segundos visible, tamaño de letra, modelo).
+- traducciones.txt: historial de lo que has traducido.
+
+
+CÓMO DESINSTALAR
+1. Cierra Traductor WoW.
+2. Borra la carpeta %LOCALAPPDATA%\TraductorWoW y el acceso directo.
+3. Borra la carpeta "TraductorWoW" dentro de Interface\AddOns de tu WoW.
+4. Si no usas Ollama para otra cosa, desinstálalo desde Configuración >
+   Aplicaciones de Windows. Eso libera los 3 GB del modelo.
