@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+
+# Configuración local (se crea a partir de .env.example)
+.env
+
+# Compilados: se generan con Traductor\build.bat e Instalador\build.bat
+output/
+Instalador/build/
+Traductor/build/
+Traductor/dist/
+Traductor/*.spec
+
+# Datos de uso del programa
+Traductor/estado.json
+Traductor/traducciones.txt
