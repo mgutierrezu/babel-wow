@@ -1,0 +1,10 @@
+## Interface: 20506, 16001, 11509, 50504, 120100
+## Title: Traductor WoW
+## Notes: Clic derecho sobre un nombre en el chat -> "Traducir mensaje". Requiere el programa TraductorWoW.exe.
+## Notes-esES: Clic derecho sobre un nombre en el chat -> "Traducir mensaje". Requiere el programa TraductorWoW.exe.
+## Notes-esMX: Clic derecho sobre un nombre en el chat -> "Traducir mensaje". Requiere el programa TraductorWoW.exe.
+## Author: Mauricio Gutierrez Ulloa
+## Version: 1.0.0
+## SavedVariables: TraductorWoWDB
+
+TraductorWoW.lua
