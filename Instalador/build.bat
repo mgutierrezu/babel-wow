@@ -13,6 +13,7 @@ echo Compilando el instalador...
 python -m PyInstaller --onefile --noconsole --clean --name InstalarTraductorWoW ^
     --icon "%RAIZ%\Traductor\icono.ico" --exclude-module pystray --exclude-module PIL ^
     --distpath "%RAIZ%\output" --workpath "%~dp0build" --specpath "%~dp0build" ^
+    --paths "%RAIZ%\Traductor" ^
     --add-data "%RAIZ%\Traductor\dist\TraductorWoW.exe;paquete" ^
     --add-data "%RAIZ%\Traductor\.env.example;paquete" ^
     --add-data "%RAIZ%\Traductor\prompt.txt;paquete" ^

@@ -22,16 +22,19 @@ CÓMO INSTALAR
    solo; si no, búscala con "Examinar". Ejemplo:
       C:\Program Files (x86)\World of Warcraft\_classic_era_
    Es la carpeta que tiene dentro "Interface" y "WTF".
-4. Haz clic en "Instalar" y espera. Descarga unos 4 GB en total, así que puede
-   tardar varios minutos.
-5. Al terminar aparece la pantalla de verificación. Cuando las cinco líneas
+4. Elige el modelo de traducción. Viene marcado el sugerido para tu tarjeta de
+   video; si dudas, déjalo así. Los más livianos usan menos memoria de video,
+   a cambio de traducciones algo peores. Se puede cambiar después.
+5. Haz clic en "Instalar" y espera. Descarga entre 2 y 4 GB según el modelo,
+   así que puede tardar varios minutos.
+6. Al terminar aparece la pantalla de verificación. Cuando las cinco líneas
    estén en verde y la última quede girando, está todo listo.
 
 
 CÓMO USARLO
 1. Abre "Traductor WoW" desde el acceso directo del Escritorio. Se abre su
-   ventana y queda en la barra de tareas. Cuando el punto se pone verde y dice
-   "Funcionando", está listo. Puedes minimizarla, pero no la cierres: mientras
+   ventana y queda en la barra de tareas. Cuando aparece el visto bueno verde y
+   dice "LLM funcionando", está listo. Puedes minimizarla, pero no la cierres: mientras
    esté abierta todo funciona, y al cerrarla se apagan el traductor y la IA
    (se libera la memoria de la tarjeta de video).
 2. Abre WoW. En la pantalla de personajes entra a "AddOns" y revisa que
@@ -60,11 +63,9 @@ la ventana "Traductor WoW" de la barra de tareas.
 
 SI ALGO NO FUNCIONA
 - No aparece la traducción: revisa que Traductor WoW esté abierto (su
-  ventana en la barra de tareas, con el punto verde).
+  ventana en la barra de tareas, con el visto bueno verde).
 - "No se pudo conectar con Ollama": cierra la ventana de Traductor WoW y
   vuelve a abrirlo.
-- La primera traducción tarda unos segundos: es normal, está cargando la IA.
-  Las siguientes son casi instantáneas.
 - Si ya usabas Ollama para otras cosas: el instalador no cambia nada de tu
   Ollama, y el traductor no lo apaga si ya estaba abierto.
 - No aparece el addon en el juego: instalaste en la carpeta de otra versión de
@@ -75,6 +76,14 @@ SI ALGO NO FUNCIONA
   con Python. Agrega una excepción.
 - Para revisar el estado en cualquier momento, vuelve a abrir el instalador:
   no descarga nada de nuevo y muestra la verificación.
+
+
+SI EL JUEGO VA LENTO O LAS TRADUCCIONES SALEN MAL
+En la ventana de Traductor WoW hay un selector "Modelo de traducción":
+- Si el juego va lento, elige uno más liviano.
+- Si las traducciones salen mal y tu tarjeta de video lo permite, elige el
+  recomendado.
+El programa descarga el modelo si hace falta y recuerda tu elección.
 
 
 PARA AJUSTAR LAS TRADUCCIONES
