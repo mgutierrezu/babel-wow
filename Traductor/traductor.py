@@ -13,7 +13,8 @@ import ctypes
 
 from app.almacen import Estado, Historial
 from app.aplicacion import Aplicacion
-from app.config import cargar_config
+from app.config import cargar_config, guardar_valor
+from app.modelos import MODELOS, buscar
 from app.ollama import ClienteOllama
 from app.portapapeles import VigilantePortapapeles
 from app.prompt import Prompt, pulir
@@ -51,6 +52,13 @@ def main():
     traductor = ClienteOllama(armar_mensajes=prompt.mensajes, pulir=pulir, **conexion)
     traductor_enviar = ClienteOllama(armar_mensajes=prompt_enviar.mensajes, **conexion)
 
+    # Modelos que se pueden elegir en la ventana. Si el .env trae uno que no está
+    # en la lista (puesto a mano), se agrega para no perderlo.
+    opciones = [(m.nombre, m.titulo, m.etiqueta, m.descripcion) for m in MODELOS]
+    if not buscar(config.ollama_modelo):
+        opciones.append((config.ollama_modelo, config.ollama_modelo, config.ollama_modelo,
+                         "Modelo configurado a mano en el archivo .env."))
+
     # Cerrar la ventana principal es salir: por eso la ventana necesita a la aplicación.
     aplicacion = None
     ventana = Ventana(
@@ -73,6 +81,8 @@ def main():
         segundos_visible=config.ventana_segundos_visible,
         avisos=avisos,
         servidor=ServidorOllama(config.ollama_url, gestionar=config.ollama_encender_y_apagar),
+        modelos=opciones,
+        al_cambiar_modelo=lambda nombre: guardar_valor(resolver(".env"), "OLLAMA_MODELO", nombre),
     )
     aplicacion.iniciar()
 
