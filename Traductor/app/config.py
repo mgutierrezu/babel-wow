@@ -16,7 +16,7 @@ from .rutas import preparar_archivo
 class Config:
     # Conexión con Ollama
     ollama_url: str = "http://127.0.0.1:11434"
-    ollama_modelo: str = "gemma3:4b"
+    ollama_modelo: str = "qwen2.5:3b"
     ollama_api_key: str = ""
     ollama_encender_y_apagar: bool = True
     ollama_timeout_segundos: float = 90
