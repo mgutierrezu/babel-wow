@@ -521,7 +521,7 @@ class Instalador:
         for modelo in MODELOS:
             tk.Radiobutton(c, variable=self.eleccion, value=modelo.nombre, bg=FONDO, activebackground=FONDO,
                            anchor="w", font=("Segoe UI", 10, "bold"), highlightthickness=0,
-                           text=f"{modelo.titulo}  ·  {numero(modelo.video_gb)} GB de memoria de video  ·  "
+                           text=f"{modelo.nivel}  ·  {numero(modelo.video_gb)} GB de memoria de video  ·  "
                                 f"descarga {numero(modelo.descarga_gb)} GB").pack(fill="x")
             self._texto(c, modelo.descripcion, tam=9, color=GRIS, ancho=490, padx=(24, 0), pady=(0, 3))
 
