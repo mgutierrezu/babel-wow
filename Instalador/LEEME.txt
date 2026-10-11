@@ -23,8 +23,8 @@ CÓMO INSTALAR
       C:\Program Files (x86)\World of Warcraft\_classic_era_
    Es la carpeta que tiene dentro "Interface" y "WTF".
 4. Elige el modelo de traducción. Viene marcado el sugerido para tu tarjeta de
-   video; si dudas, déjalo así. Los más livianos usan menos memoria de video,
-   a cambio de traducciones algo peores. Se puede cambiar después.
+   video; si dudas, déjalo así. Hay tres niveles: Alto, Medio y Bajo. Los más bajos
+   usan menos memoria de video, a cambio de traducciones algo peores. Se puede cambiar después.
 5. Haz clic en "Instalar" y espera. Descarga entre 2 y 4 GB según el modelo,
    así que puede tardar varios minutos.
 6. Al terminar aparece la pantalla de verificación. Cuando las cinco líneas
@@ -80,9 +80,9 @@ SI ALGO NO FUNCIONA
 
 SI EL JUEGO VA LENTO O LAS TRADUCCIONES SALEN MAL
 En la ventana de Traductor WoW hay un selector "Modelo de traducción":
-- Si el juego va lento, elige uno más liviano.
+- Si el juego va lento, elige un nivel más bajo.
 - Si las traducciones salen mal y tu tarjeta de video lo permite, elige el
-  recomendado.
+  nivel Alto.
 El programa descarga el modelo si hace falta y recuerda tu elección.
 
 
@@ -93,7 +93,9 @@ barra de direcciones del Explorador:   %LOCALAPPDATA%\TraductorWoW
   agrégala ahí. Los cambios se aplican en la siguiente traducción.
 - prompt_en.txt: lo mismo, para lo que escribes con /twow.
 - .env: configuración (segundos visible, tamaño de letra, modelo).
-- traducciones.txt: historial de lo que has traducido.
+- traducciones.txt: historial de lo que has traducido. Se limpia solo: al
+  llegar a 10 MB guarda una copia como traducciones.anterior.txt y empieza
+  de nuevo, así que nunca ocupa más de 20 MB.
 
 
 CÓMO DESINSTALAR

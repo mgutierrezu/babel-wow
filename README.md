@@ -56,25 +56,25 @@ El modelo de IA es lo que más memoria de video ocupa, y la comparte con el jueg
 
 | Modelo | Memoria de video | Descarga | Calidad | Para quién |
 | --- | --- | --- | --- | --- |
-| **Recomendado** (`gemma3:4b`) | 3,9 GB | 3,3 GB | La mejor | Tarjetas de 8 GB o más |
-| **Intermedio** (`qwen2.5:3b`) | 2,4 GB | 1,9 GB | Cercana a la recomendada | Tarjetas de 6 GB |
-| **Liviano** (`qwen2.5:1.5b`) | 1,3 GB | 1,0 GB | Más tosca, pero se entiende | Tarjetas de 4 GB, o si el juego va lento |
+| **Alto** (`gemma3:4b`) | 3,9 GB | 3,3 GB | La mejor | Tarjetas de 8 GB o más, si quieres traducciones más naturales |
+| **Medio**, recomendado (`qwen2.5:3b`) | 2,4 GB | 1,9 GB | Buena | Tarjetas de 6 GB o más |
+| **Bajo** (`qwen2.5:1.5b`) | 1,3 GB | 1,0 GB | Más tosca, pero se entiende | Tarjetas de 4 GB, o si el juego va lento |
 
-La calidad se comparó con 32 mensajes de chat en ambos sentidos. El modelo liviano escribe bien en inglés, pero su español es menos natural. El glosario y los ejemplos del proyecto se ajustaron con el modelo recomendado, así que los otros dos tienen margen de mejora.
+La calidad se comparó con 32 mensajes de chat en ambos sentidos. El nivel Bajo escribe bien en inglés, pero su español es menos natural. El glosario y los ejemplos del proyecto se ajustaron con el nivel Alto, así que los otros dos tienen margen de mejora.
 
-`qwen2.5:3b` se distribuye con la "Qwen Research License", más restrictiva que la de los otros dos modelos. Revísala con `ollama show qwen2.5:3b --license` si piensas darle un uso que no sea personal.
+El modelo del nivel Medio, `qwen2.5:3b`, se distribuye con la "Qwen Research License", más restrictiva que la de los otros dos. Revísala con `ollama show qwen2.5:3b --license` si piensas darle un uso que no sea personal; en ese caso puedes elegir cualquiera de los otros.
 
-**Cuánto consume mientras lo usas**, medido con el modelo recomendado en un equipo con una RTX 5070 de 12 GB:
+**Cuánto consume mientras lo usas**, medido con el nivel Medio en un equipo con una RTX 5070 de 12 GB:
 
 | Recurso | Consumo |
 | --- | --- |
-| Memoria de video | 3,9 GB mientras el programa está abierto |
-| Memoria RAM | 1,2 GB |
-| Tiempo por traducción | 0,2 segundos |
+| Memoria de video | 2,4 GB mientras el programa está abierto |
+| Memoria RAM | 0,7 GB |
+| Tiempo por traducción | 0,15 segundos |
 | Al abrir el programa | 5 a 10 segundos: enciende la IA y carga el modelo |
-| Uso de la tarjeta de video | Solo durante esos 0,2 s; el resto del tiempo, 0 % |
+| Uso de la tarjeta de video | Solo mientras traduce; el resto del tiempo, 0 % |
 
-Con el juego abierto y el modelo cargado, ese equipo usó 10 GB de sus 12 GB de memoria de video. En una tarjeta con menos memoria, el juego y el traductor compiten por ella.
+Con el juego abierto y el modelo cargado, ese equipo usó 6 GB de sus 12 GB de memoria de video. En una tarjeta con menos memoria, el juego y el traductor compiten por ella. El nivel Alto ocupa 1,5 GB más de video.
 
 Sin una tarjeta de video adecuada el modelo corre en el procesador. Funciona, pero cada traducción tarda bastante más; no está medido.
 
@@ -108,7 +108,7 @@ Si prefieres no usar el instalador, o quieres compilarlo tú, sigue los pasos de
 
 ### Antes de jugar
 
-1. Abre **Traductor WoW** desde el Escritorio. Aparece su ventana en la barra de tareas. Cuando aparece el visto bueno verde y dice "LLM (Recomendado) funcionando", está listo. Mientras enciende, un indicador gira en amarillo; si algo falla, queda en rojo con la explicación.
+1. Abre **Traductor WoW** desde el Escritorio. Aparece su ventana en la barra de tareas. Cuando aparece el visto bueno verde y dice "LLM (Medio) funcionando", está listo. Mientras enciende, un indicador gira en amarillo; si algo falla, queda en rojo con la explicación.
 2. Puedes minimizarla, pero **no la cierres**: mientras esté abierta todo funciona, y al cerrarla se apagan el traductor y la IA.
 3. Abre WoW. En la pantalla de personajes entra a "AddOns" y revisa que "Traductor WoW" esté marcado.
 4. En Opciones → Gráficos, pon el juego en **"Pantalla completa (en ventana)"**. En pantalla completa exclusiva ninguna ventana externa puede verse encima del juego.
@@ -164,7 +164,7 @@ El programa no envía teclas ni clics al juego, no lee su memoria y no automatiz
 No. La traducción la hace un modelo que corre en tu computador. Internet solo se usa durante la instalación, para descargar Ollama y el modelo.
 
 **¿Tiene algún costo?**
-No. El programa es de código abierto, y Ollama y el modelo `gemma3:4b` son gratuitos.
+No. El programa es de código abierto, y Ollama y los modelos que usa son gratuitos.
 
 **¿Con qué versiones de WoW funciona?**
 Está probado en un cliente Classic (versión 1.60). El addon también declara compatibilidad con Classic Era, TBC Anniversary, MoP Classic y Retail, pero en esas versiones no está comprobado. Si lo pruebas en otra, cuéntalo en un [reporte](https://github.com/mgutierrezu/babel-wow/issues).
@@ -176,7 +176,7 @@ Está pensado y ajustado para inglés ↔ español. Un mensaje en otro idioma se
 No. Al cerrar la ventana del programa se apagan el traductor y la IA, y nada se inicia con Windows. Si ya usabas Ollama para otras cosas, el programa lo usa y no lo apaga.
 
 **¿Baja los FPS?**
-La memoria de video queda reservada mientras el programa está abierto, pero la tarjeta solo trabaja durante los 0,2 s de cada traducción. Lo esperable es, como mucho, un tirón breve al traducir. No está medido dentro del juego.
+La memoria de video queda reservada mientras el programa está abierto, pero la tarjeta solo trabaja durante la fracción de segundo que dura cada traducción. Lo esperable es, como mucho, un tirón breve al traducir. No está medido dentro del juego.
 
 ## Limitaciones conocidas
 
@@ -204,7 +204,7 @@ Los archivos están en la carpeta del programa. Para abrirla, pega esto en la ba
 | `prompt.txt` | Reglas, glosario y ejemplos para traducir del inglés al español |
 | `prompt_en.txt` | Lo mismo, para lo que escribes en español |
 | `.env` | Configuración general |
-| `traducciones.txt` | Historial de lo que has traducido |
+| `traducciones.txt` | Historial de lo que has traducido. Se limpia solo: ver más abajo |
 
 Se editan con el Bloc de notas.
 
@@ -227,6 +227,10 @@ Lo más efectivo es agregar al glosario la palabra que falló:
 
 Puedes agregar todas las líneas que quieras al glosario sin que la traducción se vuelva más lenta: el programa le entrega al modelo solo las que aparecen en cada mensaje. Los ejemplos sí se envían siempre, así que no conviene pasar de unos 40.
 
+### El historial se limpia solo
+
+Cada traducción se guarda en `traducciones.txt`. Cuando ese archivo llega a 10 MB (unas 60.000 traducciones), pasa a llamarse `traducciones.anterior.txt` y se empieza uno nuevo; el "anterior" que hubiera se borra. Así siempre conservas lo más reciente y el historial nunca ocupa más de 20 MB. El límite se cambia con `HISTORIAL_MAXIMO_MB`, y el historial se apaga con `HISTORIAL_ACTIVO=false`.
+
 ### Cambiar de modelo
 
 En la ventana del programa hay un selector "Modelo de traducción". Al elegir otro, el indicador gira en amarillo con un porcentaje mientras se hace el cambio: el programa descarga el modelo si hace falta, libera la memoria del anterior, carga el nuevo y recuerda la elección. Al terminar vuelve el visto bueno con el nombre del modelo en uso. No hay que reiniciar nada. Si la descarga falla, vuelve al modelo que estaba funcionando.
@@ -241,7 +245,7 @@ El archivo `.env` se lee al abrir el programa, así que hay que reiniciarlo desp
 | `VENTANA_OPACIDAD` | `0.9` | De 0.2 (casi invisible) a 1.0 (opaca) |
 | `VENTANA_ANCHO` | `440` | Ancho de la ventana en píxeles |
 | `VENTANA_FUENTE`, `VENTANA_TAMANO_FUENTE` | `Segoe UI`, `11` | Letra de la ventana |
-| `OLLAMA_MODELO` | `gemma3:4b` | Modelo que traduce. Se cambia desde la ventana del programa; aquí puedes poner cualquier otro de Ollama |
+| `OLLAMA_MODELO` | `qwen2.5:3b` | Modelo que traduce. Se cambia desde la ventana del programa; aquí puedes poner cualquier otro de Ollama |
 | `OLLAMA_MANTENER_MODELO` | `30m` | Tiempo que el modelo queda en memoria sin usarse |
 | `OLLAMA_ENCENDER_Y_APAGAR` | `true` | El programa enciende Ollama al abrirse y lo apaga al cerrarse. Con `false` usa el que ya esté abierto |
 | `HISTORIAL_ACTIVO` | `true` | Guardar el historial |
@@ -259,6 +263,7 @@ El archivo `.env` se lee al abrir el programa, así que hay que reiniciarlo desp
 | `PROMPT_ARCHIVO` | `prompt.txt` | Archivo de instrucciones, inglés a español |
 | `PROMPT_ENVIAR_ARCHIVO` | `prompt_en.txt` | Archivo de instrucciones, español a inglés |
 | `HISTORIAL_ARCHIVO` | `traducciones.txt` | Archivo del historial |
+| `HISTORIAL_MAXIMO_MB` | `10` | Tamaño máximo del historial. Con `0` no se limita |
 
 </details>
 
@@ -282,13 +287,13 @@ Un valor inválido no detiene el programa: se usa el valor por defecto y la vent
 
 **"El modelo ... no está descargado".** Elígelo de nuevo en el selector de la ventana del programa: lo descarga solo.
 
-**"Ollama no respondió en 90 segundos".** La primera traducción carga el modelo y demora más; intenta de nuevo. Si se repite, el modelo no cabe en tu tarjeta de video y está corriendo en el procesador: cambia a uno más liviano en la ventana del programa.
+**"Ollama no respondió en 90 segundos".** La primera traducción carga el modelo y demora más; intenta de nuevo. Si se repite, el modelo no cabe en tu tarjeta de video y está corriendo en el procesador: cambia a un nivel más bajo en la ventana del programa.
 
 **Copié el texto y no pasó nada.** Revisa que Traductor WoW esté abierto, con el visto bueno verde.
 
 **La ventana de la traducción no se ve sobre el juego.** Pon el juego en "Pantalla completa (en ventana)" en Opciones → Gráficos.
 
-**El juego va más lento.** El modelo comparte la tarjeta de video con el juego. Cambia a un modelo más liviano en la ventana del programa, o baja la calidad gráfica.
+**El juego va más lento.** El modelo comparte la tarjeta de video con el juego. Cambia a un nivel más bajo en la ventana del programa, o baja la calidad gráfica.
 
 **Ollama vuelve a abrirse con Windows.** Sus actualizaciones pueden restaurar el inicio automático. Se deshabilita en Administrador de tareas → "Aplicaciones de arranque".
 
@@ -320,7 +325,7 @@ Un valor inválido no detiene el programa: se usa el valor por defecto y la vent
 Necesitas [Python 3.10 o superior](https://www.python.org/downloads/) y [Ollama](https://ollama.com/download). El programa no usa librerías externas para funcionar.
 
 ```
-ollama pull gemma3:4b
+ollama pull qwen2.5:3b
 python Traductor\traductor.py
 ```
 
