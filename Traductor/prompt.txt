@@ -59,7 +59,8 @@ Reparto del loot:
 - roll greed: tirar greed
 - roll, rolls: tirar dados (o "crear un personaje", según el contexto)
 - reroll: crear otro personaje
-- ML: master looter, quien reparte el loot
+- ML, master looter: quien reparte el loot
+- pass on: pasar (no tirar dados por el objeto)
 - FFA: loot libre para todos
 - DE: desencantar (convertir un objeto en materiales)
 - BoE: se liga al equipar
@@ -68,7 +69,7 @@ Reparto del loot:
 - drop rate: probabilidad de que caiga
 
 Palabras que se dejan en inglés:
-- tank, tanks, healer, healers, DPS, caster, casters, guild, guilds, spec, specs, summon, summons, pull, pulls, wipe, buff, buffs, debuff, debuffs, nerf, loot, farm, raid, raids, aggro, taunt, carry, boss, bosses, adds, cooldown, CD, CDs, proc, gear, quest, quests, party, PvP, PvE, AoE, CC, boost, alt, alts, main, addon, addons, retail, vanilla, classic+, OP, HC, BiS, pre-bis, prebis, GDKP, mats, stack, stacks, enchants, AH, ninja, twink, gank, ganked, ganking, premade: (igual)
+- tank, tanks, healer, healers, DPS, caster, casters, guild, guilds, spec, specs, summon, summons, pull, pulls, wipe, buff, buffs, debuff, debuffs, nerf, loot, farm, raid, raids, aggro, taunt, carry, boss, bosses, adds, cooldown, CD, CDs, proc, gear, quest, quests, party, PvP, PvE, AoE, CC, boost, alt, alts, main, addon, addons, retail, vanilla, classic+, OP, HC, BiS, pre-bis, prebis, GDKP, mats, stack, stacks, enchants, AH, ninja, twink, gank, ganked, ganking, premade, cleave: (igual)
 - lol, lmao, rofl, haha, hahaha, hehe, xd, kek: (igual)
 
 Clases y especializaciones:
@@ -95,6 +96,14 @@ Clases y especializaciones:
 - hordies: jugadores de la Horda
 
 Combate:
+- puller: quien hace el pull
+- interrupt, interrupts: cortar el hechizo
+- kick: cortar el hechizo (o "expulsar del grupo", si habla de un jugador)
+- dots: daño en el tiempo
+- hots: sanación en el tiempo
+- crowd control: control de masas
+- line of sight: línea de visión
+- bres, battle rez, battle res: resurrección en combate
 - mob: enemigo
 - mobs: enemigos
 - pat, pats: patrulla de enemigos
@@ -177,6 +186,12 @@ Lugares:
 - FP: punto de vuelo
 - GY: cementerio
 - mailbox, mail box: buzón
+- mail: correo (o "malla", si habla de armadura)
+- hearthstone: piedra de hogar
+- flight path: punto de vuelo
+- summon stone, summoning stone, meeting stone: piedra de encuentro
+- auction house: casa de subastas
+- vendor: vendedor
 - inn: posada
 - trainer: entrenador
 - layer, layers: capa del servidor (layer)
@@ -207,7 +222,7 @@ Conversación:
 - inc: viene / se acerca
 - gz, gratz, grats: felicitaciones
 - gg, ggs: buena partida
-- gd: buen duelo
+- gd: bien (o "buen duelo", después de un duelo)
 - gl: buena suerte
 - glhf: buena suerte y que se diviertan
 - gj: buen trabajo
