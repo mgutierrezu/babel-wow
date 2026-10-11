@@ -7,16 +7,34 @@ from datetime import datetime
 
 
 class Historial:
-    """Registro de traducciones en un archivo de texto."""
+    """Registro de traducciones en un archivo de texto.
 
-    def __init__(self, ruta, activo=True):
+    Para que no crezca sin límite, al pasar de maximo_mb el archivo se guarda
+    como "<nombre>.anterior<ext>" (reemplazando al anterior que hubiera) y se
+    empieza uno nuevo. Así se conserva siempre lo más reciente, en dos archivos
+    que juntos no superan el doble del máximo. Con maximo_mb=0 no se limita.
+    """
+
+    def __init__(self, ruta, activo=True, maximo_mb=10):
         self.ruta = ruta
         self.activo = activo
+        self.maximo_bytes = int(maximo_mb * 1024 * 1024)
+        self.ruta_anterior = ruta.with_name(f"{ruta.stem}.anterior{ruta.suffix}")
+
+    def _rotar_si_hace_falta(self):
+        if self.maximo_bytes <= 0:
+            return
+        try:
+            if self.ruta.stat().st_size >= self.maximo_bytes:
+                os.replace(self.ruta, self.ruta_anterior)  # lo que había en "anterior" se pierde
+        except OSError:
+            pass  # si no existe o está abierto en otro programa, se sigue escribiendo en el actual
 
     def guardar(self, remitente, canal, original, traduccion):
         if not self.activo:
             return
         hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self._rotar_si_hace_falta()
         try:
             with open(self.ruta, "a", encoding="utf-8") as archivo:
                 archivo.write(f"[{hora}] {remitente} ({canal})\n")

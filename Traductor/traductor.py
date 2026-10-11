@@ -36,7 +36,7 @@ def main():
 
     config, avisos = cargar_config()
 
-    historial = Historial(resolver(config.historial_archivo), config.historial_activo)
+    historial = Historial(resolver(config.historial_archivo), config.historial_activo, config.historial_maximo_mb)
     conexion = dict(
         url=config.ollama_url,
         modelo=config.ollama_modelo,

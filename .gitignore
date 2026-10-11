@@ -13,4 +13,4 @@ Traductor/*.spec
 
 # Datos de uso del programa
 Traductor/estado.json
-Traductor/traducciones.txt
+Traductor/traducciones*.txt
