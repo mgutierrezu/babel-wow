@@ -60,6 +60,22 @@ def leer_env(ruta):
     return valores
 
 
+def guardar_valor(ruta, clave, valor):
+    """Cambia una variable del archivo .env sin tocar el resto (comentarios incluidos)."""
+    try:
+        lineas = ruta.read_text(encoding="utf-8-sig").splitlines()
+    except OSError:
+        lineas = []
+    nueva = f"{clave}={valor}"
+    for indice, linea in enumerate(lineas):
+        if linea.split("=", 1)[0].strip().upper() == clave and not linea.lstrip().startswith("#"):
+            lineas[indice] = nueva
+            break
+    else:
+        lineas.append(nueva)
+    ruta.write_text("\n".join(lineas) + "\n", encoding="utf-8")
+
+
 def _convertir(texto, tipo):
     if tipo is bool:
         if texto.lower() in VERDADERO:
