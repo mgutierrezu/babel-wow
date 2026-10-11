@@ -10,6 +10,7 @@ Hay dos:
 import ctypes
 import tkinter as tk
 from ctypes import wintypes
+from tkinter import ttk
 
 COLOR_FONDO = "#14161c"
 COLOR_TITULO = "#f2c94c"
@@ -36,6 +37,45 @@ _leer_estilo.argtypes = [wintypes.HWND, ctypes.c_int]
 _leer_estilo.restype = ctypes.c_ssize_t
 _fijar_estilo.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_ssize_t]
 _fijar_estilo.restype = ctypes.c_ssize_t
+
+
+class Indicador(tk.Canvas):
+    """Circulito de estado de la ventana principal.
+
+    "ok" es un visto bueno verde (la IA está encendida), "espera" gira en amarillo
+    (encendiendo, descargando o cambiando de modelo) y "error" queda fijo en rojo.
+    """
+
+    def __init__(self, padre, lado):
+        super().__init__(padre, width=lado, height=lado, bg=COLOR_FONDO, highlightthickness=0)
+        self.lado, self.tipo, self.angulo, self.tarea = lado, "espera", 90, None
+        self._dibujar()
+
+    def poner(self, tipo):
+        self.tipo = tipo if tipo in ESTADOS else "ok"
+        self._dibujar()
+
+    def _dibujar(self):
+        if self.tarea:
+            self.after_cancel(self.tarea)
+            self.tarea = None
+        self.delete("all")
+        color, borde, centro = ESTADOS[self.tipo], self.lado * 0.16, self.lado / 2
+        a, b = borde, self.lado - borde
+        if self.tipo != "espera":
+            self.create_oval(a, a, b, b, fill=color, outline="")
+            if self.tipo == "ok":  # visto bueno
+                m = self.lado
+                self.create_line(m * .30, m * .52, m * .44, m * .66, m * .71, m * .36, fill=COLOR_FONDO,
+                                 width=max(2, round(m * 0.12)), capstyle="round", joinstyle="round")
+            return
+        grosor = max(2, round(self.lado * 0.14))
+        self.create_oval(a, a, b, b, outline=COLOR_BOTON, width=grosor)
+        self.create_arc(a, a, b, b, start=self.angulo, extent=110, style="arc", outline=color, width=grosor)
+        radio = self.lado * 0.14
+        self.create_oval(centro - radio, centro - radio, centro + radio, centro + radio, fill=color, outline="")
+        self.angulo = (self.angulo - 18) % 360
+        self.tarea = self.after(50, self._dibujar)
 
 
 class Ventana:
@@ -81,17 +121,28 @@ class Ventana:
 
         fila = tk.Frame(marco, bg=COLOR_FONDO)
         fila.pack(fill="x", pady=(int(8 * e), int(10 * e)))
-        self.lbl_punto = tk.Label(fila, text="●", bg=COLOR_FONDO, fg=COLOR_TITULO, font=(fuente, 12))
-        self.lbl_punto.pack(side="left", anchor="n")
+        self.indicador = Indicador(fila, int(20 * e))
+        self.indicador.pack(side="left", anchor="n", pady=(int(1 * e), 0))
         self.lbl_estado = tk.Label(fila, fg=COLOR_TEXTO, font=(fuente, 10), bg=COLOR_FONDO, anchor="w",
                                    justify="left", wraplength=ancho - int(26 * e))
         self.lbl_estado.pack(side="left", fill="x", padx=(int(8 * e), 0))
 
         tk.Label(marco, fg=COLOR_ORIGINAL, font=(fuente, 9), **comunes,
-                 text="Deja esta ventana abierta mientras juegas; puedes minimizarla. "
-                      "Al cerrarla se apagan el traductor y la IA.").pack(fill="x")
+                 text="En WoW, haz clic sobre un mensaje del chat y presiona Ctrl+C. "
+                      "Al cerrar esta ventana se apagan el traductor y la IA.").pack(fill="x")
 
-        botones = tk.Frame(marco, bg=COLOR_FONDO)
+        # Selector de modelo. Se llena con poner_opciones(); hasta entonces no se muestra.
+        self.marco_opciones = tk.Frame(marco, bg=COLOR_FONDO)
+        tk.Label(self.marco_opciones, text="Modelo de traducción", fg=COLOR_TEXTO, font=(fuente, 9, "bold"),
+                 **comunes).pack(fill="x", pady=(int(12 * e), int(3 * e)))
+        self.selector = ttk.Combobox(self.marco_opciones, state="readonly", font=(fuente, 9))
+        self.selector.pack(fill="x")
+        self.selector.bind("<<ComboboxSelected>>", self._al_elegir_opcion)
+        self.lbl_opcion = tk.Label(self.marco_opciones, fg=COLOR_ORIGINAL, font=(fuente, 9), **comunes)
+        self.lbl_opcion.pack(fill="x", pady=(int(3 * e), 0))
+        self.opciones, self.al_elegir = [], None
+
+        botones = self.marco_botones = tk.Frame(marco, bg=COLOR_FONDO)
         botones.pack(fill="x", pady=(int(14 * e), 0))
         estilo = dict(bg=COLOR_BOTON, fg=COLOR_TEXTO, activebackground="#3a3f4b", activeforeground=COLOR_TEXTO,
                       relief="flat", bd=0, font=(fuente, 9), padx=int(12 * e), pady=int(5 * e), cursor="hand2")
@@ -101,8 +152,34 @@ class Ventana:
 
     def poner_estado(self, texto, tipo="ok"):
         """Muestra en la ventana principal cómo está el programa: "espera", "ok" o "error"."""
-        self.lbl_punto.config(fg=ESTADOS.get(tipo, COLOR_OK))
+        self.indicador.poner(tipo)
         self.lbl_estado.config(text=texto)
+
+    def poner_opciones(self, opciones, actual, al_elegir):
+        """Muestra el selector. opciones: lista de (clave, etiqueta, descripción);
+        al_elegir(clave) se llama cuando el usuario escoge otra."""
+        self.opciones, self.al_elegir = list(opciones), al_elegir
+        self.selector.config(values=[etiqueta for _, etiqueta, _ in self.opciones])
+        self.marco_opciones.pack(fill="x", before=self.marco_botones)
+        self.elegir_opcion(actual)
+
+    def elegir_opcion(self, clave):
+        """Deja seleccionada una opción sin avisar a nadie (por ejemplo, al deshacer un cambio)."""
+        for indice, (una, _, descripcion) in enumerate(self.opciones):
+            if una == clave:
+                self.selector.current(indice)
+                self.lbl_opcion.config(text=descripcion)
+
+    def bloquear_opciones(self, bloquear):
+        """Impide cambiar de opción mientras se aplica un cambio anterior."""
+        self.selector.config(state="disabled" if bloquear else "readonly")
+
+    def _al_elegir_opcion(self, _evento):
+        clave, _, descripcion = self.opciones[self.selector.current()]
+        self.lbl_opcion.config(text=descripcion)
+        self.selector.selection_clear()
+        if self.al_elegir:
+            self.al_elegir(clave)
 
     # --- ventana flotante (traducciones) ---
 

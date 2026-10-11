@@ -47,18 +47,49 @@ class ClienteOllama:
             raise ErrorTraduccion("Ollama devolvió una respuesta vacía.")
         return traduccion
 
-    def revisar(self):
-        """Lanza ErrorTraduccion si Ollama no está corriendo o falta el modelo."""
+    def descargado(self):
+        """Indica si el modelo configurado ya está en el equipo. Falla si Ollama no responde."""
         respuesta = self._pedir("/api/tags", timeout=5)
         nombres = [m.get("name", "") for m in respuesta.get("models", [])]
-        if not any(n in (self.modelo, self.modelo + ":latest") or n.split(":")[0] == self.modelo
-                   for n in nombres):
+        return any(n in (self.modelo, self.modelo + ":latest") or n.split(":")[0] == self.modelo for n in nombres)
+
+    def revisar(self):
+        """Lanza ErrorTraduccion si Ollama no está corriendo o falta el modelo."""
+        if not self.descargado():
             raise self._error_modelo()
+
+    def descargar(self, progreso):
+        """Descarga el modelo configurado. progreso(fracción) se llama con el avance, de 0 a 1."""
+        cuerpo = json.dumps({"model": self.modelo, "stream": True}).encode("utf-8")
+        peticion = urllib.request.Request(self.url + "/api/pull", data=cuerpo, headers=self.cabeceras)
+        try:
+            with self.abridor.open(peticion, timeout=120) as respuesta:
+                for linea in respuesta:
+                    if not linea.strip():
+                        continue
+                    paso = json.loads(linea)
+                    if paso.get("error"):
+                        raise ErrorTraduccion(f'No se pudo descargar "{self.modelo}": {paso["error"]}')
+                    if paso.get("total"):
+                        progreso(paso.get("completed", 0) / paso["total"])
+        except (OSError, ValueError) as error:
+            raise ErrorTraduccion(f"Se cortó la descarga del modelo. Revisa tu conexión a internet. ({error})") from None
+
+    def cargar(self):
+        """Deja el modelo configurado cargado en memoria, sin traducir nada."""
+        self._pedir("/api/generate", {"model": self.modelo, "keep_alive": self.mantener_modelo})
+
+    def soltar(self, modelo):
+        """Saca un modelo de la memoria de video. Si falla no importa: Ollama lo suelta solo más tarde."""
+        try:
+            self._pedir("/api/generate", {"model": modelo, "keep_alive": 0}, timeout=15)
+        except ErrorTraduccion:
+            pass
 
     def _error_modelo(self):
         return ErrorTraduccion(
             f'El modelo "{self.modelo}" no está descargado. '
-            f"Abre una terminal y ejecuta: ollama pull {self.modelo}"
+            "Elígelo en la ventana del programa para descargarlo."
         )
 
     def _pedir(self, ruta, cuerpo=None, timeout=None):

@@ -44,6 +44,14 @@ else:
 
 DESTINO = Path(os.environ.get("LOCALAPPDATA", Path.home())) / "TraductorWoW"
 
+# La lista de modelos y la escritura del .env se comparten con el traductor, para
+# que el instalador y el programa ofrezcan lo mismo. Al compilar, PyInstaller
+# encuentra el paquete "app" gracias a la opción --paths de build.bat.
+if not getattr(sys, "frozen", False):
+    sys.path.insert(0, str(_raiz / "Traductor"))
+from app.config import guardar_valor, leer_env  # noqa: E402
+from app.modelos import MODELOS, buscar, memoria_de_video, numero, sugerir  # noqa: E402
+
 
 class ErrorInstalacion(Exception):
     """Falla con un mensaje pensado para mostrarse al usuario."""
@@ -64,15 +72,19 @@ def api(ruta, cuerpo=None, timeout=5):
         return json.loads(respuesta.read().decode("utf-8"))
 
 
-def modelo_configurado():
-    """El modelo se toma de la configuración del traductor: una sola fuente."""
-    try:
-        for linea in RECURSOS["env"].read_text(encoding="utf-8-sig").splitlines():
-            if linea.startswith("OLLAMA_MODELO="):
-                return linea.split("=", 1)[1].strip() or "gemma3:4b"
-    except OSError:
-        pass
-    return "gemma3:4b"
+def modelo_inicial(destino):
+    """Modelo que se propone al abrir el instalador y el motivo, para mostrarlo.
+
+    Si ya hay una instalación se respeta el que el usuario tenía; si no, se
+    sugiere uno según la memoria de la tarjeta de video.
+    """
+    instalado = leer_env(destino / ".env").get("OLLAMA_MODELO")
+    if instalado and buscar(instalado):
+        return instalado, "Es el modelo que ya tienes instalado."
+    video = memoria_de_video()
+    if video is None:
+        return sugerir(None).nombre, "No se pudo detectar tu tarjeta de video; elige según su memoria."
+    return sugerir(video).nombre, f"Tu tarjeta de video tiene {numero(round(video))} GB: te sugerimos el marcado."
 
 
 def version_ollama():
@@ -180,7 +192,7 @@ def modelo_descargado(modelo):
 
 def descargar_modelo(modelo, avisar, progreso):
     """Descarga el modelo con la API de Ollama, mostrando el avance."""
-    avisar(f"Descargando el modelo {modelo} (unos 3 GB, puede tardar varios minutos)...")
+    avisar(f"Descargando el modelo {modelo} (puede tardar varios minutos)...")
     cuerpo = json.dumps({"model": modelo, "stream": True}).encode("utf-8")
     peticion = urllib.request.Request(OLLAMA + "/api/pull", data=cuerpo, headers={"Content-Type": "application/json"})
     try:
@@ -415,7 +427,7 @@ class Instalador:
     def __init__(self, destino=DESTINO, escritorio=None):
         self.destino = Path(destino)       # carpeta donde se instala el traductor
         self.escritorio = escritorio       # carpeta del acceso directo (None = Escritorio)
-        self.modelo = modelo_configurado()
+        self.modelo, self.motivo_modelo = modelo_inicial(self.destino)
         self.addons = None                 # carpeta AddOns elegida
         self.cola = queue.Queue()          # mensajes de los hilos hacia la ventana
         self.vigilando = False
@@ -502,12 +514,20 @@ class Instalador:
         self._texto(c, "Es la carpeta que tiene dentro \"Interface\" y \"WTF\". Cada versión del juego tiene la suya: "
                        "_retail_, _classic_era_, _classic_, _anniversary_...", tam=9, color=GRIS, pady=(0, 16))
 
-        self._texto(c, "Qué se va a instalar", negrita=True)
-        self._texto(c, "•  Ollama, el programa que ejecuta la IA (si no lo tienes).\n"
-                       f"•  El modelo {self.modelo}: unos 3 GB de descarga.\n"
-                       "•  El addon TraductorWoW, en la carpeta de arriba.\n"
-                       "•  El programa Traductor WoW, con un acceso directo en el Escritorio.",
-                    color="#374151", pady=(4, 16))
+        self._texto(c, "Modelo de traducción", negrita=True)
+        self._texto(c, self.motivo_modelo + " Podrás cambiarlo después desde la ventana del programa.",
+                    tam=9, color=GRIS, pady=(0, 4))
+        self.eleccion = tk.StringVar(value=self.modelo)
+        for modelo in MODELOS:
+            tk.Radiobutton(c, variable=self.eleccion, value=modelo.nombre, bg=FONDO, activebackground=FONDO,
+                           anchor="w", font=("Segoe UI", 10, "bold"), highlightthickness=0,
+                           text=f"{modelo.titulo}  ·  {numero(modelo.video_gb)} GB de memoria de video  ·  "
+                                f"descarga {numero(modelo.descarga_gb)} GB").pack(fill="x")
+            self._texto(c, modelo.descripcion, tam=9, color=GRIS, ancho=490, padx=(24, 0), pady=(0, 3))
+
+        self._texto(c, "Además se instala Ollama (el programa que ejecuta la IA, si no lo tienes), el addon en la "
+                       "carpeta de arriba y Traductor WoW con un acceso directo en el Escritorio.",
+                    tam=9, color="#374151", pady=(8, 14))
 
         self.btn_instalar = ttk.Button(c, text="Instalar", command=self._al_instalar)
         self.btn_instalar.pack(anchor="w", ipadx=18, ipady=3)
@@ -527,6 +547,7 @@ class Instalador:
         except ErrorInstalacion as error:
             self.lbl_estado.config(text=str(error), fg=ROJO)
             return
+        self.modelo = self.eleccion.get()
         self.btn_instalar.config(state="disabled")
         threading.Thread(target=self._instalar, daemon=True).start()
 
@@ -552,6 +573,7 @@ class Instalador:
             avisar("Instalando el traductor...")
             migrar_programa_anterior(self.destino, self.escritorio)
             crear_acceso_directo(instalar_programa(self.destino), self.escritorio)
+            guardar_valor(self.destino / ".env", "OLLAMA_MODELO", self.modelo)  # el traductor usará el elegido
             self.cola.put(("verificar",))
         except ErrorInstalacion as error:
             self.cola.put(("error", str(error)))
