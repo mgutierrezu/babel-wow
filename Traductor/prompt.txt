@@ -26,57 +26,140 @@ Si una sigla también es una palabra común, acláralo entre paréntesis (mira I
 Los EJEMPLOS del final sí se envían completos en cada traducción y ocupan la memoria
 del modelo: hoy usan poco más de la mitad. No pases de unos 40 ejemplos.
 
-Buscar grupo:
+Buscar grupo y roles:
 - LFM: buscamos más jugadores
 - LFG: busco grupo
 - LF: busco (a alguien o algo)
 - LF1M: falta 1 (lo que sigue dice qué rol falta)
 - LF2M: faltan 2 (lo que sigue dice qué roles faltan)
 - LF3M: faltan 3 (lo que sigue dice qué roles faltan)
-- heals: healer
+- LF4M: faltan 4 (lo que sigue dice qué roles faltan)
+- heals, healz: healer
+- MT: main tank, el tank principal (si es el mensaje entero, significa "me equivoqué de chat")
+- OT: off tank, el tank secundario
+- rdps: DPS a distancia
+- mdps: DPS cuerpo a cuerpo
+- melee: cuerpo a cuerpo
+- ranged: a distancia
 - inv: invitación / invítame
 - rdy: listo
-- SR: reserva suave
-- HR: reserva fija
+- summ, summs: summon
+- full run: run completa
+- last spot: último lugar
+- 1 spot: 1 lugar
+
+Reparto del loot:
+- SR: reserva suave (soft reserve)
+- HR: reserva fija (hard reserve)
+- MS>OS: prioridad a la spec principal sobre la secundaria
+- MS: main spec, la spec principal (con un número delante es el ping en milisegundos)
+- OS: off spec, la spec secundaria
+- NBG, need before greed: need antes que greed
+- roll need: tirar need
+- roll greed: tirar greed
+- roll, rolls: tirar dados (o "crear un personaje", según el contexto)
+- reroll: crear otro personaje
+- ML: master looter, quien reparte el loot
+- FFA: loot libre para todos
+- DE: desencantar (convertir un objeto en materiales)
+- BoE: se liga al equipar
+- BoP: se liga al recoger
+- drop, drops: lo que suelta un enemigo
+- drop rate: probabilidad de que caiga
 
 Palabras que se dejan en inglés:
-- tank, tanks, healer, healers, DPS, guild, guilds, spec, specs, summon, summons, pull, pulls, wipe, buff, buffs, debuff, nerf, loot, farm, raid, aggro, carry, boss, cooldown, CD, proc, gear, quest, party, PvP, PvE, AoE, boost, alt, alts, main, addon, addons, retail, OP, HC, BiS, mats, enchants, AH: (igual)
+- tank, tanks, healer, healers, DPS, caster, casters, guild, guilds, spec, specs, summon, summons, pull, pulls, wipe, buff, buffs, debuff, debuffs, nerf, loot, farm, raid, raids, aggro, taunt, carry, boss, bosses, adds, cooldown, CD, CDs, proc, gear, quest, quests, party, PvP, PvE, AoE, CC, boost, alt, alts, main, addon, addons, retail, vanilla, classic+, OP, HC, BiS, pre-bis, prebis, GDKP, mats, stack, stacks, enchants, AH, ninja, twink, gank, ganked, ganking, premade: (igual)
 - lol, lmao, rofl, haha, hahaha, hehe, xd, kek: (igual)
 
-Clases:
-- warrior, warriors, paladin, paladins, hunter, hunters, rogue, rogues, priest, priests, shaman, shamans, mage, mages, warlock, warlocks, druid, druids: (igual)
+Clases y especializaciones:
+- warrior, warriors, paladin, paladins, hunter, hunters, rogue, rogues, priest, priests, shaman, shamans, mage, mages, warlock, warlocks, druid, druids, feral: (igual)
 - pala, pally: Paladin
 - lock: Warlock
-- shammy: Shaman
+- shammy, sham: Shaman
+- dudu, drood: Druid
+- war: Warrior (la clase; como palabra suelta significa "guerra")
+- spriest: Shadow Priest
+- ret: Retribution (Paladin de daño)
+- prot: Protection (spec de tank)
+- resto: Restoration (spec de healer)
+- boomkin, boomy: Druid Balance
+- enh: Enhancement (Shaman cuerpo a cuerpo)
+- ele: Elemental (Shaman de hechizos)
+- disc: Discord, o Discipline si habla de un Priest
+- aff, affli: Affliction
+- destro: Destruction
+- demo: Demonology
+- ally: de la Alianza
+- allies: jugadores de la Alianza
+- hordie: jugador de la Horda
+- hordies: jugadores de la Horda
 
-Profesiones:
-- blacksmith, blacksmithing, enchanter, enchanting, alchemist, alchemy, tailor, tailoring, engineer, engineering, leatherworker, leatherworking, jewelcrafter, jewelcrafting, herbalism, mining, skinning: (igual)
+Combate:
+- mob: enemigo
+- mobs: enemigos
+- pat, pats: patrulla de enemigos
+- LoS: línea de visión
+- oom: sin maná
+- crit, crits: crítico
+- AP: poder de ataque
+- str: fuerza
+- agi: agilidad
+- stam: aguante
+- int: intelecto
+- spi: espíritu
+- fort: Fortitude (el buff de aguante)
+- lust: Bloodlust (el hechizo)
+- BR: resurrección en combate (o "brasileño", si habla de jugadores)
+- SS: Soulstone, o Southshore si habla de un lugar
+- HS: Hearthstone (piedra de hogar), o Healthstone si la pide a un Warlock
+- hearth: usar la piedra de hogar
+- rez, ress: revivir
+- res: revivir (o "resistencia", si habla de equipo)
+- respawn: reaparición
+- dmg: daño
+- wpn, wep, weap: arma
+- 2h: arma de dos manos
+- 1h: arma de una mano
+- mh: mano principal
+- ilvl: nivel de objeto
+- epic, epics: épico
+
+Comercio y profesiones:
+- WTS: vendo
+- WTB: compro
+- WTT: intercambio
+- LFW: ofrezco mis servicios de (la profesión que sigue)
+- PST, pm me, dm me, w me, /w me, wisp me, whisper me: envíame un susurro
+- your mats: con tus mats
+- my mats: con mis mats
+- have mats: tengo los mats
+- tip, tips: propina
+- fee: tarifa
+- ea: cada uno
+- obo: o la mejor oferta
+- PC: price check, consulta de precio (o "computador", según el contexto)
+- COD: pago contra entrega por correo
+- BO: precio de compra inmediata
+- pot, pots, potion, potions: poción
+- xmute: transmutación
+- port, ports: portal
+- lockbox, lockboxes: caja con cerradura
+- bag: bolsa
+- bags: bolsas
+- blacksmith, blacksmithing, enchanter, enchanting, alchemist, alchemy, tailor, tailoring, engineer, engineering, leatherworker, leatherworking, jewelcrafter, jewelcrafting, herbalism, mining, skinning, lockpicking: (igual)
 - BS: Blacksmith (la profesión; como insulto significa "tontería")
 - ench: Enchanter
 - alch: Alchemist
 - JC: Jewelcrafter
 - LW: Leatherworker
-- eng, engi: Engineer (la profesión; a veces significa "inglés")
+- eng, engi: Engineer
 - eng guild, english guild: guild de habla inglesa
 - eng only, english only: solo inglés
-- LFW: ofrezco mis servicios de (la profesión que sigue)
+- eng speaking, speak eng: de habla inglesa
+- herbs: hierbas
+- FA: primeros auxilios
 
-Comercio:
-- WTS: vendo
-- WTB: compro
-- WTT: intercambio
-- PST, pm me, dm me, w me, /w me, wisp me, whisper me: envíame un susurro
-- your mats: con tus mats
-- my mats: con mis mats
-- tip, tips: propina
-- pot, pots, potion, potions: poción
-- wpn: weapon
-- dmg: daño
-- port, ports: portal
-- BoE: se liga al equipar
-- BoP: se liga al recoger
-
-Ciudades:
+Lugares:
 - IF: Ironforge, la ciudad (solo si habla de un lugar; la palabra "if" significa "si")
 - SW: Stormwind
 - Org: Orgrimmar
@@ -85,48 +168,118 @@ Ciudades:
 - Darn: Darnassus (el lugar; como exclamación significa "rayos")
 - BB: Booty Bay (el lugar; como despedida significa "adiós")
 - Shatt: Shattrath
+- STV: Stranglethorn Vale
+- BRM: Blackrock Mountain
+- EPL: Eastern Plaguelands
+- WPL: Western Plaguelands
+- XR: Crossroads
+- TM: Tarren Mill
+- FP: punto de vuelo
+- GY: cementerio
+- mailbox, mail box: buzón
+- inn: posada
+- trainer: entrenador
+- layer, layers: capa del servidor (layer)
+- realm: reino
 
-Mazmorras y bandas:
-- SM, RFC, WC, BFD, Stocks, DM, SFK, RFK, RFD, Gnomer, Ulda, ZF, Mara, ST, BRD, LBRS, UBRS, Scholo, Strat, MC, BWL, ZG, AQ, Naxx, Ony, Kara, RoL: (igual)
+Mazmorras, bandas y campos de batalla:
+- SM, Cath, Lib, RFC, WC, VC, BFD, Stocks, DM, DME, DMW, DMN, SFK, RFK, RFD, Gnomer, Ulda, ZF, Mara, ST, BRD, LBRS, UBRS, Scholo, Strat, MC, BWL, ZG, AQ, AQ20, AQ40, Naxx, Ony, Kara, Gruul, Mag, SSC, TK, BT, ZA, Ramps, BF, SL, SV, SH, Mech, Bot, Arc, RoL, AV, WSG, AB: (igual)
+- BG, BGs: campo de batalla
+- queue, queued: cola
+- FC: quien lleva la bandera
+- camping, camped, corpse camp: matar una y otra vez al mismo jugador (camping)
 
 Addons:
 - Bagnon, Questie, DBM, WeakAuras, Details, ElvUI, Auctionator, AtlasLoot, Leatrix: (igual)
 
 Conversación:
-- ty, thx, tyvm: gracias
-- np: de nada
-- pls, plz: por favor
+- ty, thx, tyvm, tysm: gracias
+- np, yw: de nada
+- nw: no te preocupes
+- pls, plz, plox: por favor
 - sry: perdón
 - brb: ya vuelvo
+- bbl: vuelvo más tarde
+- bbs: vuelvo pronto
 - afk: ausente
-- omw: voy en camino
-- oom: sin maná
+- omw, otw: voy en camino
+- eta: tiempo estimado de llegada
 - inc: viene / se acerca
-- gz, grats: felicitaciones
-- gg: buena partida
+- gz, gratz, grats: felicitaciones
+- gg, ggs: buena partida
+- gd: buen duelo
 - gl: buena suerte
+- glhf: buena suerte y que se diviertan
 - gj: buen trabajo
+- wp: bien jugado
+- nt: buen intento
+- ez: fácil
 - wb: bienvenido de vuelta
-- omg: Dios mío
-- wtf: ¿qué pasó?
+- gn: buenas noches
+- gm: buenos días (en mayúsculas, GM es Game Master o Guild Master)
+- cya: nos vemos
+- omg, omfg: Dios mío
+- wtf, wth: ¿qué pasó?
+- ffs: por el amor de Dios
 - idk: no sé
-- imo: en mi opinión
-- tbh: la verdad
+- idc: no me importa
+- ikr: ¿verdad que sí?
+- imo, imho: en mi opinión
+- tbh, ngl: la verdad
+- fr: en serio (o "francés", si habla de jugadores)
 - btw: por cierto
+- fyi: para que sepas
+- afaik: hasta donde sé
+- iirc: si mal no recuerdo
 - nvm: olvídalo
-- ofc: por supuesto
-- atm: en este momento
+- jk: es broma
+- ofc, obv: por supuesto
+- srsly, rly: en serio
+- prob, prolly: probablemente
+- tho: aunque
+- atm, rn: en este momento
+- asap: lo antes posible
+- irl: en la vida real
+- tmr, tmrw: mañana
+- sec: segundo
+- min lvl, min level: nivel mínimo
+- min: minuto
+- mins: minutos
+- hr, hrs: hora
+- b4: antes
+- w/: con
+- w/o: sin
+- u: tú
+- ur: tu (o "eres")
+- k, kk: ok
+- ye, yea, yep: sí
+- nah, nope: no
 - ppl: gente
-- any1: alguien
+- any1, some1, sm1: alguien
+- every1: todos
+- no1: nadie
+- smth, sth: algo
+- m8: amigo
 - bc, cuz: porque
 - mb, my bad: fue mi error
-- rez, ress: revivir
-- res: revivir (o "resistencia", si habla de equipo)
+- lmk: avísame
+- hmu: escríbeme
+- add me: agrégame
+- stfu: cállate
+- noob, n00b, newb, nub: novato
+- ded: muerto
+- rip: qué mal (alguien murió o algo salió mal)
+- dc, d/c: desconexión
+- dced: se desconectó
 - mount: montura
 - lvl: nivel
 - lvling, leveling: subir de nivel
+- xp, exp: experiencia
+- grind, grinding: farmear sin parar (grind)
+- turn in: entregar la misión
 - QoL: calidad de vida
 - WPvP: PvP en mundo abierto
+- nochanges, #nochanges: "sin cambios" (lema de quienes no quieren cambios en Classic)
 - restarded: estúpido (insulto escrito con letras cambiadas)
 
 EJEMPLOS
@@ -138,6 +291,9 @@ Traducción: Buscamos tank y healer para SFK, luego empezamos.
 
 Mensaje: WTS [Arcanite Reaper] 50g, pst
 Traducción: Vendo [Arcanite Reaper] a 50g, envíame un susurro.
+
+Mensaje: WTT 5[Elixir of the Mongoose] for 2 [Flask of the Titans]
+Traducción: Intercambio 5 [Elixir of the Mongoose] por 2 [Flask of the Titans].
 
 Mensaje: tank oom, wipe incoming
 Traducción: El tank se quedó sin maná, vamos a hacer wipe.

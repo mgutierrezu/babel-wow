@@ -46,8 +46,9 @@ def leer_glosario(texto):
         for clave in claves.split(","):
             clave = clave.strip()
             if clave:
-                # Palabra completa, sin importar mayúsculas: "if" no calza dentro de "gift".
-                patron = re.compile(r"(?<![\w/])" + re.escape(clave) + r"(?!\w)", re.IGNORECASE)
+                # Palabra completa, sin importar mayúsculas: "if" no calza dentro de "gift",
+                # ni "DE" dentro de "de-buff". Sí calza junto a una barra: "tank/healer".
+                patron = re.compile(r"(?<!\w)(?<!\w-)" + re.escape(clave) + r"(?!\w|-\w)", re.IGNORECASE)
                 glosario.append((clave, patron, significado.strip()))
     # Las siglas largas primero: "my mats" debe ganarle a "mats".
     glosario.sort(key=lambda entrada: -len(entrada[0]))
