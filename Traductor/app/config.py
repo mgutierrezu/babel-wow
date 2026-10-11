@@ -35,6 +35,7 @@ class Config:
     prompt_enviar_archivo: str = "prompt_en.txt"
     historial_activo: bool = True
     historial_archivo: str = "traducciones.txt"
+    historial_maximo_mb: float = 10
 
 
 VERDADERO = {"1", "true", "si", "sí", "yes", "on"}
