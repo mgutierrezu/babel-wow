@@ -18,39 +18,98 @@ programa busca estas palabras en cada mensaje y le entrega al modelo solo las qu
 aparecen. Para corregir una traducción, agrega aquí la palabra que falló.
 Los EJEMPLOS del final sí se envían completos en cada traducción: no pases de unos 40.
 
-Buscar grupo:
+Buscar grupo y roles:
 - busco grupo: LFG
 - busco: LF (buscar a alguien o algo; solo "busco grupo" es LFG)
 - buscamos: LFM
 - falta 1, falta uno: LF1M
 - faltan 2, faltan dos: LF2M
 - faltan 3, faltan tres: LF3M
-- sanador, curandero: healer
+- faltan 4, faltan cuatro: LF4M
+- sanador, curandero, curador: healer
 - tanque: tank
+- daño a distancia: ranged DPS
+- cuerpo a cuerpo: melee
 - mazmorra, mazmorras: dungeon
 - banda: raid
 - bandas: raids
 - hermandad, clan: guild
 - en español, de habla hispana, hispana: Spanish-speaking
+- misión, mision: quest
+- misiones: quests
+- invítame, invitame, invita: inv
+- invocar, invocarme, invocación, invocacion: summon
+- listo, listos: rdy
+- último lugar, ultimo lugar: last spot
+- grupo completo: full group
+- run completa: full run
+
+Loot:
+- botín, botin: loot
 - tirar necesidad, necesidad: roll need
 - tirar codicia, codicia: roll greed
+- tirar dados, tiren dados: roll
+- desencantar: DE
+- objeto: item
+- objetos: items
+- reserva suave: SR
+- reserva fija: HR
+- especialización principal, spec principal: MS
+- especialización secundaria, spec secundaria: OS
+
+Combate:
+- jefe: boss
+- jefes: bosses
+- enemigos, bichos: mobs
+- patrulla: pat
+- agro, amenaza: aggro
+- sin maná, sin mana: oom
+- curar, cúrame, curame, cura: heal
+- revivir, resucitar, revíveme, reviveme, resu: res
+- bufo, bufos, bufar: buff
+- piedra de hogar: hearthstone
+- piedra de alma: soulstone
+- piedra de salud: healthstone
+- línea de visión, linea de vision: LoS
+- cementerio: graveyard
+- reaparición, reaparicion: respawn
+- equipo: gear (el equipamiento; si habla de personas es "group")
+- arma: weapon
+- dos manos: 2h
+- una mano: 1h
+- escudo: shield
+- abalorio: trinket
+- armadura: armor
+- tela: cloth
+- cuero: leather
+- malla: mail
+- placas: plate
+- talentos: talents
+- experiencia: xp
 - subir de nivel: level up
-- misión, mision, misiones: quest
-- invítame, invitame, invita: inv
-- invocar, invocarme, invocación: summon
-- listo, listos: rdy
+- farmear: farm
 
 Comercio:
 - vendo: WTS
 - compro: WTB
 - cambio, intercambio: WTT
+- ofrezco mis servicios, ofrezco: LFW (ofrecer una profesión)
 - susúrrame, susurrame, envíame un susurro, mándame un susurro, por susurro: pst
 - casa de subastas, subasta: AH
 - propina: tip
 - materiales: mats
+- con mis materiales, llevo los materiales, tengo los materiales: my mats
+- con tus materiales: your mats
+- cada uno, cada una: ea
 - de oro: g (ejemplo: "50 de oro" es "50g")
 - de plata: s (ejemplo: "20 de plata" es "20s")
+- de cobre: c (ejemplo: "5 de cobre" es "5c")
 - portal, portales: port
+- poción, pocion: potion
+- pociones: potions
+- barato: cheap
+- gratis: free
+- contra reembolso: COD
 
 Clases:
 - guerrero: warrior
@@ -62,6 +121,8 @@ Clases:
 - mago: mage
 - brujo: warlock
 - druida: druid
+- Alianza: Alliance
+- Horda: Horde
 
 Profesiones:
 - herrero: blacksmith
@@ -69,28 +130,75 @@ Profesiones:
 - encantador: enchanter
 - encantamiento: enchant
 - alquimista: alchemist
+- alquimia: alchemy
 - joyero: jewelcrafter
 - peletero: leatherworker
+- peletería, peleteria: leatherworking
 - sastre: tailor
+- sastrería, sastreria: tailoring
 - ingeniero: engineer
+- ingeniería, ingenieria: engineering
+- herboristería, herboristeria: herbalism
+- minería, mineria: mining
+- desuello: skinning
+- primeros auxilios: first aid
+- entrenador: trainer
 
-Ciudades:
+Lugares:
 - Ventormenta: Stormwind
 - Forjaz: Ironforge
 - Entrañas: Undercity
 - Cima del Trueno: Thunder Bluff
 - Bahía del Botín: Booty Bay
+- Bosque de Elwynn: Elwynn Forest
+- Páramos de Poniente: Westfall
+- Crestagrana: Redridge
+- Bosque del Ocaso: Duskwood
+- Tuercespina: Stranglethorn Vale
+- Los Baldíos, Baldíos: The Barrens
+- Vallefresno: Ashenvale
+- Tierras de la Peste: Plaguelands
+- Minas de la Muerte: Deadmines
+- Cavernas de los Lamentos: Wailing Caverns
+- Castillo de Colmillo Oscuro: Shadowfang Keep
+- Monasterio Escarlata: Scarlet Monastery
+- Las Mazmorras: The Stockade
+- Profundidades de Roca Negra: Blackrock Depths
+- Núcleo de Magma: Molten Core
+- Guarida de Onyxia: Onyxia's Lair
+- Guarida de Alanegra: Blackwing Lair
+- buzón, buzon, correo: mailbox
+- posada: inn
+- banco: bank
+- punto de vuelo, vuelo: flight path
+- campo de batalla: BG
 
 Conversación:
 - gracias: ty
+- muchas gracias: tyvm
 - de nada: np
 - por favor, porfa: pls
-- perdón, perdon, disculpa, disculpen: sry
+- perdón, perdon, disculpa, disculpen, lo siento: sry
 - ya vuelvo, vuelvo enseguida: brb
-- sin maná, sin mana: oom
+- vuelvo más tarde, vuelvo mas tarde: bbl
+- voy en camino, voy para allá, voy para alla: omw
 - felicitaciones, felicidades: gz
 - buena partida: gg
 - buena suerte: gl
+- buen trabajo: gj
+- bien jugado: wp
+- buenas noches: gn
+- nos vemos: cya
+- no sé, no se: idk
+- no importa, olvídalo, olvidalo: nvm
+- es broma: jk
+- por cierto: btw
+- un segundo, un momento: 1 sec
+- minutos: mins
+- mañana: tmr
+- avísame, avisame: lmk
+- agrégame, agregame: add me
+- se desconectó, se desconecto: dc
 - nivel: lvl
 - montura: mount
 - jaja, jajaja, jeje: lol
