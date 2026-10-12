@@ -98,6 +98,8 @@ Al cerrar el programa se apaga la IA y se libera toda esa memoria. No queda nada
 6. Haz clic en "Instalar" y espera. Puede tardar varios minutos por las descargas.
 7. Al terminar aparece una pantalla de verificación. Cuando las cinco líneas estén en verde, está listo.
 
+Si tiene que descargar el instalador de Ollama, antes de ejecutarlo comprueba que venga firmado digitalmente por Ollama Inc.; si no, se detiene sin ejecutarlo.
+
 El instalador hace cuatro cosas: instala Ollama si no lo tienes, descarga el modelo de traducción, copia el addon a tu WoW, e instala el programa en `%LOCALAPPDATA%\TraductorWoW` con un acceso directo en el Escritorio. Si lo vuelves a ejecutar no descarga nada de nuevo y conserva tu configuración.
 
 ### Opción manual
@@ -162,6 +164,12 @@ El programa no envía teclas ni clics al juego, no lee su memoria y no automatiz
 
 **¿Envía mi chat a alguna parte?**
 No. La traducción la hace un modelo que corre en tu computador. Internet solo se usa durante la instalación, para descargar Ollama y el modelo.
+
+**¿Lee todo lo que copio?**
+Sí: para saber si un texto viene del addon tiene que mirar el portapapeles cada vez que copias algo, aunque sea una contraseña. Si no empieza con `[TR]` o `[EN]` lo descarta en el momento: no lo guarda, no lo muestra y no lo envía a ninguna parte. Puedes comprobarlo en `Traductor/app/aplicacion.py`.
+
+**¿Qué guarda en mi equipo?**
+El historial de traducciones (`traducciones.txt`), que incluye los mensajes de otros jugadores con su nombre. Se limpia solo al llegar a 10 MB y se puede apagar con `HISTORIAL_ACTIVO=false`.
 
 **¿Tiene algún costo?**
 No. El programa es de código abierto, y Ollama y los modelos que usa son gratuitos.

@@ -29,6 +29,7 @@ from tkinter import filedialog, ttk
 
 OLLAMA = "http://127.0.0.1:11434"
 INSTALADOR_OLLAMA = "https://ollama.com/download/OllamaSetup.exe"
+EDITOR_OLLAMA = "Ollama Inc."  # quien firma digitalmente el instalador oficial
 EJEMPLO = r"C:\Program Files (x86)\World of Warcraft\_classic_era_"
 SIN_VENTANA = 0x08000000  # para que los comandos no abran una consola
 
@@ -123,6 +124,21 @@ def descargar(url, destino, progreso):
                 progreso(hecho / total)
 
 
+def firma_valida(archivo, editor):
+    """Pregunta a Windows si el archivo trae una firma digital válida de ese editor.
+    Así no se ejecuta un instalador alterado aunque la descarga se haya interceptado."""
+    entorno = dict(os.environ, TG_ARCHIVO=str(archivo))
+    comando = ("$f = Get-AuthenticodeSignature -LiteralPath $env:TG_ARCHIVO; "
+               "$f.Status.ToString() + '|' + $f.SignerCertificate.Subject")
+    try:
+        resultado = subprocess.run(["powershell", "-NoProfile", "-NonInteractive", "-Command", comando],
+                                   capture_output=True, text=True, env=entorno, creationflags=SIN_VENTANA, timeout=60)
+    except (OSError, subprocess.SubprocessError):
+        return False
+    estado, _, sujeto = resultado.stdout.strip().partition("|")
+    return estado == "Valid" and f"O={editor}," in sujeto + ","
+
+
 def instalar_ollama(avisar, progreso):
     """Instala Ollama con winget; si no hay winget, descarga el instalador oficial."""
     if shutil.which("winget"):
@@ -140,8 +156,14 @@ def instalar_ollama(avisar, progreso):
         descargar(INSTALADOR_OLLAMA, instalador, progreso)
     except OSError as error:
         raise ErrorInstalacion(f"No se pudo descargar Ollama. Revisa tu conexión a internet. ({error})") from None
-    avisar("Instalando Ollama...")
+    avisar("Comprobando la firma digital del instalador de Ollama...")
     progreso(None)
+    if not firma_valida(instalador, EDITOR_OLLAMA):
+        instalador.unlink(missing_ok=True)
+        raise ErrorInstalacion("El instalador de Ollama que se descargó no tiene una firma digital válida de "
+                               f"{EDITOR_OLLAMA}, así que no se ejecutó. Instálalo a mano desde "
+                               "https://ollama.com/download y vuelve a abrir este instalador.")
+    avisar("Instalando Ollama...")
     subprocess.run([str(instalador), "/VERYSILENT", "/NORESTART"], timeout=1800)
     if not ruta_ollama():
         raise ErrorInstalacion("Ollama no quedó instalado. Instálalo a mano desde https://ollama.com/download "
@@ -365,7 +387,7 @@ def crear_acceso_directo(ejecutable, carpeta=None):
                "$a = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $c 'Traductor WoW.lnk')); "
                "$a.TargetPath = $env:TG_EXE; $a.WorkingDirectory = (Split-Path $env:TG_EXE); "
                "$a.Description = 'Traductor de chat para World of Warcraft'; $a.Save()")
-    subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", comando],
+    subprocess.run(["powershell", "-NoProfile", "-NonInteractive", "-Command", comando],
                    capture_output=True, env=entorno, creationflags=SIN_VENTANA, timeout=60)
 
 
